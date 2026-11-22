@@ -1,4 +1,4 @@
-import { createDds, type Dds } from './index.js';
+import { createDds, type Dds } from './dds.js';
 import { DdsError } from './error.js';
 
 type Method = 'calcTable' | 'par' | 'sidesPar' | 'analyse' | 'solveBoard' | 'analysePlay';

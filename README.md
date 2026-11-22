@@ -42,18 +42,20 @@ rank (`'SA'`, `'HT'`). Errors from DDS are thrown as `DdsError` with the DDS `co
 A table takes about 150–200 ms. Calls block, so in a browser run them in a worker:
 
 ```ts
-import { connectDdsWorker } from 'bridge-dds-wasm';
+import { connectDdsWorker } from 'bridge-dds-wasm/client';
 
 const dds = connectDdsWorker();          // same methods, returning promises
 const { table, par } = await dds.analyse(deal, { dealer: 'S', vulnerability: 'None' });
 ```
 
-`connectDdsWorker()` starts the worker that ships with the package. With Vite, pass the
-worker in yourself, because dependency pre-bundling breaks the package-relative URL:
+`connectDdsWorker()` starts the worker that ships with the package; Vite and webpack bundle
+it on their own. Import it from `bridge-dds-wasm/client` to keep the solver itself out of the
+main-thread bundle. With Vite, set `worker.format: 'es'` and exclude the package from
+dependency pre-bundling, which would break the worker's URL in dev:
 
 ```ts
-import DdsWorker from 'bridge-dds-wasm/worker?worker';
-const dds = connectDdsWorker(new DdsWorker());
+// vite.config
+export default { worker: { format: 'es' }, optimizeDeps: { exclude: ['bridge-dds-wasm'] } };
 ```
 
 ## Build
