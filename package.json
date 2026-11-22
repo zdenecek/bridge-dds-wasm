@@ -1,0 +1,40 @@
+{
+  "name": "bridge-dds-wasm",
+  "version": "0.1.0",
+  "description": "Bo Haglund's double dummy solver (DDS) for contract bridge, compiled to WebAssembly for browsers and Node",
+  "license": "Apache-2.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./worker": {
+      "types": "./dist/worker.d.ts",
+      "default": "./dist/worker.js"
+    }
+  },
+  "files": [
+    "dist",
+    "wasm",
+    "NOTICE"
+  ],
+  "sideEffects": [
+    "./dist/worker.js"
+  ],
+  "keywords": [
+    "bridge",
+    "double dummy",
+    "dds",
+    "par",
+    "wasm"
+  ],
+  "scripts": {
+    "build:wasm": "scripts/build-wasm.sh",
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.js"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3"
+  }
+}

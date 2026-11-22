@@ -1,0 +1,7 @@
+bridge-dds-wasm
+Copyright 2026 Zdeněk Tomis
+
+This package contains the Double Dummy Solver (DDS) compiled to WebAssembly.
+DDS: https://github.com/dds-bridge/dds
+Copyright Bo Haglund, Soren Hein and the DDS contributors.
+Licensed under the Apache License, Version 2.0.
