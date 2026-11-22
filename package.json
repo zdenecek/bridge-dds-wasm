@@ -14,12 +14,19 @@
     "./worker": {
       "types": "./dist/worker.d.ts",
       "default": "./dist/worker.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
     }
   },
   "typesVersions": {
     "*": {
       "worker": [
         "dist/worker.d.ts"
+      ],
+      "client": [
+        "dist/client.d.ts"
       ]
     }
   },

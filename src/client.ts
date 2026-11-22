@@ -1,4 +1,4 @@
-import type { Dds } from './index.js';
+import type { Dds } from './dds.js';
 import { DdsError } from './error.js';
 
 type Method = 'calcTable' | 'par' | 'sidesPar' | 'analyse' | 'solveBoard' | 'analysePlay';
@@ -12,8 +12,8 @@ interface Reply { id: number; result?: unknown; error?: { name: string; message:
 
 /**
  * Runs the solver in a worker. Without an argument it starts the worker that ships
- * with the package; bundlers that cannot follow that (Vite pre-bundling) can pass
- * their own, e.g. `new (await import('bridge-dds-wasm/worker?worker')).default()`.
+ * with the package, which Vite and webpack bundle on their own. Pass a worker to
+ * load it some other way.
  */
 export function connectDdsWorker(worker?: Worker): DdsWorker {
   const w = worker ?? new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
