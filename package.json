@@ -4,6 +4,8 @@
   "description": "Bo Haglund's double dummy solver (DDS) for contract bridge, compiled to WebAssembly for browsers and Node",
   "license": "Apache-2.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -12,6 +14,13 @@
     "./worker": {
       "types": "./dist/worker.d.ts",
       "default": "./dist/worker.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "worker": [
+        "dist/worker.d.ts"
+      ]
     }
   },
   "files": [
@@ -32,7 +41,8 @@
   "scripts": {
     "build:wasm": "scripts/build-wasm.sh",
     "build": "tsc -p tsconfig.json",
-    "test": "npm run build && node --test test/*.test.js"
+    "test": "npm run build && node --test test/*.test.js",
+    "prepare": "tsc -p tsconfig.json"
   },
   "devDependencies": {
     "typescript": "~5.9.3"
