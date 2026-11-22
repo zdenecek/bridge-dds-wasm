@@ -1,0 +1,17 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>bridge-dds-wasm in a browser</title>
+<p>Run <code>npm run build</code>, serve the package root (e.g. <code>python3 -m http.server</code>) and open this page.</p>
+<pre id="out">Solving…</pre>
+<script type="module">
+  import { connectDdsWorker } from '../dist/index.js';
+
+  const deal = 'N:K8632.94.6.Q9642 97.AT3.A9432.A53 A4.KQ8.KQT.KJT87 QJT5.J7652.J875.';
+  const dds = connectDdsWorker();
+  const started = performance.now();
+  const { table, par } = await dds.analyse(deal, { dealer: 'S', vulnerability: 'None' });
+  const leads = await dds.solveBoard(deal, { trump: 'C', leader: 'E' });
+  const ms = Math.round(performance.now() - started);
+  document.getElementById('out').textContent =
+    JSON.stringify({ table, par, leads: leads.cards.map((c) => `${c.card} ${c.tricks}`), ms }, null, 2);
+</script>
